@@ -1,0 +1,26 @@
+{
+  "name": "wikipedia-table-scraper",
+  "version": "1.0.0",
+  "description": "Scrape wikipedia tables and do things with the results. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gedrick/wikipedia-table-scraper.git"
+  },
+  "keywords": [
+    "wikipedia"
+  ],
+  "author": "Geddy <g3ddylee@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gedrick/wikipedia-table-scraper/issues"
+  },
+  "homepage": "https://github.com/gedrick/wikipedia-table-scraper#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "request": "^2.88.0"
+  }
+}
