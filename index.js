@@ -138,7 +138,12 @@ function scrape(config) {
 //   });
 // }
 
+const filters = {
+
+}
+
 module.exports = {
   scrape,
+  filters: require('./filters')
   // checkTables
 };

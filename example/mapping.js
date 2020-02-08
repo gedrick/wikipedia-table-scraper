@@ -1,25 +1,25 @@
-const filters = require('./filters');
+const scraper = require('../index');
 
 module.exports = {
   title: {
     index: 0,
-    callbackFn: filters.getTitle
+    callbackFn: scraper.filters.getTitle
   },
   url: {
     index: 0,
-    callbackFn: filters.getUrl
+    callbackFn: scraper.filters.getUrl
   },
   developer: {
     index: 1,
-    callbackFn: filters.trimText
+    callbackFn: scraper.filters.trimText
   },
   publisher: {
     index: 2,
-    callbackFn: filters.trimText
+    callbackFn: scraper.filters.trimText
   },
   year: {
     index: 4,
-    callbackFn: filters.extractYear,
+    callbackFn: scraper.filters.extractYear,
     failFn: ($, obj) => {
       return (
         $(obj)
@@ -30,10 +30,10 @@ module.exports = {
   },
   month: {
     index: 4,
-    callbackFn: filters.extractMonth
+    callbackFn: scraper.filters.extractMonth
   },
   day: {
     index: 4,
-    callbackFn: filters.extractDay
+    callbackFn: scraper.filters.extractDay
   }
 };
