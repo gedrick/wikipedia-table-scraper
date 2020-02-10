@@ -1,7 +1,7 @@
 const req = require('request');
 const cheerio = require('cheerio');
 
-function processResults(tableIndexes, mapping, body) {
+function processResults(tableIndexes, mapping, body, maxRows = 0) {
   const $ = cheerio.load(body);
   const tables = $('.sortable');
 
@@ -10,16 +10,21 @@ function processResults(tableIndexes, mapping, body) {
   let nextResult;
   let currentProperty;
   let finalValue;
-
+  let resultsCount = 0;
   tableIndexes.forEach(tableIndex => {
     // Loop over each row in the table.
     $(tables[tableIndex])
       .find('tbody tr')
       .each((index, tableRow) => {
-        rowCells = $(tableRow).find('td');
+        if (maxRows > 0 && resultsCount >= maxRows) {
+          return;
+        }
+
+        let shortCircuited = false;
+
+        rowCells = $(tableRow).children();
 
         const props = Object.keys(mapping);
-        let shortCircuited = false;
         nextResult = {};
 
         props.forEach(propName => {
@@ -60,6 +65,7 @@ function processResults(tableIndexes, mapping, body) {
 
         if (!shortCircuited) {
           results.push(nextResult);
+          resultsCount++;
         }
       });
   });
@@ -117,8 +123,10 @@ function scrape(config) {
         const results = processResults(
           config.tableIndexes,
           config.mapping,
-          body
+          body,
+          config.maxRows
         );
+
         resolve(results);
       }
     });
