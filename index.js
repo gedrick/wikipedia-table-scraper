@@ -112,7 +112,8 @@ function processResults(tableIndexes, mapping, body, maxRows = 0) {
 // }
 
 function scrape(config) {
-  const url = `https://en.wikipedia.org/wiki/${config.page}`;
+  const url = `https://en.wikipedia.org/wiki/${encodeURIComponent(config.page)}`;
+
   return new Promise((resolve, reject) => {
     req.get({ url }, (err, resp, body) => {
       if (resp.statusCode === 404) {
